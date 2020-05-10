@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 
-namespace Netnr.FileServer
+namespace Blog.FileServer
 {
     /// <summary>
     /// 
@@ -16,10 +16,10 @@ namespace Netnr.FileServer
     public class Startup
     {
         /// <summary>
-        /// ¹¹Ôì
+        /// ï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <param name="configuration">ÅäÖÃÐÅÏ¢</param>
-        /// <param name="env">»·¾³ÐÅÏ¢</param>
+        /// <param name="configuration">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢</param>
+        /// <param name="env">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢</param>
         public Startup(IConfiguration configuration, IHostEnvironment env)
         {
             GlobalTo.Configuration = configuration;
@@ -33,13 +33,13 @@ namespace Netnr.FileServer
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {
-                //ActionÔ­ÑùÊä³öJSON
+                //ActionÔ­ï¿½ï¿½ï¿½ï¿½ï¿½JSON
                 options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-                //ÈÕÆÚ¸ñÊ½»¯
+                //ï¿½ï¿½ï¿½Ú¸ï¿½Ê½ï¿½ï¿½
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
 
-            //ÅäÖÃswagger
+            //ï¿½ï¿½ï¿½ï¿½swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -54,10 +54,10 @@ namespace Netnr.FileServer
                 });
             });
 
-            //Â·ÓÉÐ¡Ð´
+            //Â·ï¿½ï¿½Ð¡Ð´
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            //ÅäÖÃÉÏ´«ÎÄ¼þ´óÐ¡ÏÞÖÆ£¨ÏêÏ¸ÐÅÏ¢£ºFormOptions£©
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½Æ£ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢ï¿½ï¿½FormOptionsï¿½ï¿½
             services.Configure<FormOptions>(options =>
             {
                 options.MultipartBodyLengthLimit = GlobalTo.GetValue<int>("StaticResource:MaxSize") * 1024 * 1024;
@@ -67,7 +67,7 @@ namespace Netnr.FileServer
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMemoryCache memoryCache)
         {
-            //»º´æ
+            //ï¿½ï¿½ï¿½ï¿½
             CacheTo.memoryCache = memoryCache;
 
             if (env.IsDevelopment())
@@ -79,14 +79,14 @@ namespace Netnr.FileServer
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            //ÅäÖÃswagger
+            //ï¿½ï¿½ï¿½ï¿½swagger
             app.UseSwagger().UseSwaggerUI(c =>
             {
                 c.DocumentTitle = "FileServer API";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FileServer API");
             });
 
-            //¾²Ì¬×ÊÔ´ÔÊÐí¿çÓò
+            //ï¿½ï¿½Ì¬ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             app.UseStaticFiles(new StaticFileOptions()
             {
                 OnPrepareResponse = (x) =>

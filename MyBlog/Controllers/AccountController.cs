@@ -15,7 +15,7 @@ using Blog.Data.Models;
 using Blog.Common;
 using Blog.Utils;
 
-namespace Netnr.Web.Controllers
+namespace Blog.Web.Controllers
 {
     /// <summary>
     /// 账号

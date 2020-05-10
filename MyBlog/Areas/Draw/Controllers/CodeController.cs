@@ -7,7 +7,7 @@ using Blog.Func;
 using Blog.Utils;
 using Blog.Common;
 
-namespace Netnr.Web.Areas.Draw.Controllers
+namespace Blog.Web.Areas.Draw.Controllers
 {
     [Area("Draw")]
     public class CodeController : Controller

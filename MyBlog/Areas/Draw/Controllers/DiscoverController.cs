@@ -2,7 +2,7 @@
 using Blog.Func;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Netnr.Web.Areas.Draw.Controllers
+namespace Blog.Web.Areas.Draw.Controllers
 {
     [Area("Draw")]
     public class DiscoverController : Controller
@@ -17,7 +17,7 @@ namespace Netnr.Web.Areas.Draw.Controllers
         {
             var uinfo = new UserAuthAid(HttpContext).Get();
 
-            var ps = Common.DrawQuery(q, 0, uinfo.UserId, page);
+            var ps = Func.Common.DrawQuery(q, 0, uinfo.UserId, page);
             ps.Route = Request.Path;
             ViewData["q"] = q;
             return View("_PartialDrawList", ps);

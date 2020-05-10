@@ -6,7 +6,7 @@ using Blog.Func;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Netnr.Web.Controllers
+namespace Blog.Web.Controllers
 {
     /// <summary>
     /// 公共接口

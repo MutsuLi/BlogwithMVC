@@ -155,7 +155,7 @@ namespace Blog.Common
         /// <param name="path">要添加水印的图片路径</param>
         /// <param name="syPath">生成的水印图片存放的位置</param>
         /// <param name="syWord">水印文字</param>
-        public static void AddTxt(string path, string syPath, string syWord = "netnr.com")
+        public static void AddTxt(string path, string syPath, string syWord = "mutsuli.com")
         {
             Image image = Image.FromFile(path);
 

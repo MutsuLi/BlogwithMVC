@@ -11,7 +11,7 @@ using Blog.Web.Filters;
 using Func;
 using Blog.Data.Models;
 
-namespace Netnr.Web.Controllers
+namespace Blog.Web.Controllers
 {
     /// <summary>
     /// 后台管理
@@ -78,7 +78,7 @@ namespace Netnr.Web.Controllers
                     query = query.Where(x => x.UwTitle.Contains(ivm.pe1));
                 }
 
-                Common.QueryJoin(query, ivm, ref ovm);
+                Func.Common.QueryJoin(query, ivm, ref ovm);
             }
 
             return ovm;
@@ -175,7 +175,7 @@ namespace Netnr.Web.Controllers
                     query = query.Where(x => x.UrContent.Contains(ivm.pe1));
                 }
 
-                Common.QueryJoin(query, ivm, ref ovm);
+                Func.Common.QueryJoin(query, ivm, ref ovm);
             }
 
             return ovm;

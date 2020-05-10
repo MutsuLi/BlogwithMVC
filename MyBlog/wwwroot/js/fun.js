@@ -1,14 +1,11 @@
-/*
- * netnr
- * 2019-09-29
- */
+
 
 if (console) {
 
     var outs = [], fi = function () { return { msg: "", style: "" } };
 
     var oi = fi();
-    oi.msg = "NET牛人";
+    oi.msg = "Blog";
     oi.style = "padding:10px 40px 10px;line-height:50px;background:url('https://www.netnr.com/favicon.svg') no-repeat;background-size:15% 100%;font-size:1.8rem;color:#009a61";
     outs.push(oi);
 

@@ -10,13 +10,12 @@ namespace Blog.Web
             CreateHostBuilder(args).Build().Run();
         }
 
-        //dotnet Netnr.Web.dll "http://*:50"
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    //ÅäÖÃKestrel½ÓÊÕÎÄ¼þ
+                    //ï¿½ï¿½ï¿½ï¿½Kestrelï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
                     webBuilder.ConfigureKestrel((context, options) =>
                     {
                         options.Limits.MaxRequestBodySize = GlobalTo.GetValue<int>("StaticResource:MaxSize") * 1024 * 1024;

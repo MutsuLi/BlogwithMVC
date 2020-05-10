@@ -1,5 +1,5 @@
 ﻿var pObject = {
-    bucket: "netnr",
+    bucket: "mutsuli",
     opt: {
         fileInputID: "fileInput",
         //错误

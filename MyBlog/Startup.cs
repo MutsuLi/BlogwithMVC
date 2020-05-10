@@ -59,32 +59,32 @@ namespace Blog.Web
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                //cookie´æ´¢ÐèÓÃ»§Í¬Òâ£¬Å·ÃËÐÂ±ê×¼£¬ÔÝÇÒ¹Ø±Õ£¬·ñÔòÓÃ»§Ã»Í¬ÒâÎÞ·¨Ð´Èë
+                //cookieï¿½æ´¢ï¿½ï¿½ï¿½Ã»ï¿½Í¬ï¿½â£¬Å·ï¿½ï¿½ï¿½Â±ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½Ò¹Ø±Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ã»Í¬ï¿½ï¿½ï¿½Þ·ï¿½Ð´ï¿½ï¿½
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddControllersWithViews(options =>
             {
-                //×¢²áÈ«¾Ö´íÎó¹ýÂËÆ÷
+                //×¢ï¿½ï¿½È«ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 options.Filters.Add(new Filters.FilterConfigs.ErrorActionFilter());
 
-                //×¢²áÈ«¾Ö¹ýÂËÆ÷
+                //×¢ï¿½ï¿½È«ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½
                 options.Filters.Add(new Filters.FilterConfigs.GlobalFilter());
 
-                //×¢²áÈ«¾ÖÊÚÈ¨·ÃÎÊÊ±µÇÂ¼±ê¼ÇÊÇ·ñÓÐÐ§
+                //×¢ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ð§
                 options.Filters.Add(new Filters.FilterConfigs.LoginSignValid());
             });
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {
-                //ActionÔ­ÑùÊä³öJSON
+                //ActionÔ­ï¿½ï¿½ï¿½ï¿½ï¿½JSON
                 options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-                //ÈÕÆÚ¸ñÊ½»¯
+                //ï¿½ï¿½ï¿½Ú¸ï¿½Ê½ï¿½ï¿½
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
 
-            //ÅäÖÃswagger
+            //ï¿½ï¿½ï¿½ï¿½swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -99,13 +99,13 @@ namespace Blog.Web
                 });
             });
 
-            //Â·ÓÉÐ¡Ð´
+            //Â·ï¿½ï¿½Ð¡Ð´
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            //ÊÚÈ¨·ÃÎÊÐÅÏ¢
+            //ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
-                //ÔÊÐíÆäËûÕ¾µãÐ¯´øÊÚÈ¨Cookie·ÃÎÊ£¬»á³öÏÖÎ±Ôì
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Ð¯ï¿½ï¿½ï¿½ï¿½È¨Cookieï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î±ï¿½ï¿½
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.LoginPath = "/account/login";
             });
@@ -113,10 +113,10 @@ namespace Blog.Web
             //session
             services.AddSession();
 
-            //¶¨Ê±ÈÎÎñ
+            //ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
             FluentScheduler.JobManager.Initialize(new Func.TaskAid.TaskComponent.Reg());
 
-            //ÅäÖÃÉÏ´«ÎÄ¼þ´óÐ¡ÏÞÖÆ£¨ÏêÏ¸ÐÅÏ¢£ºFormOptions£©
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½Æ£ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢ï¿½ï¿½FormOptionsï¿½ï¿½
             services.Configure<FormOptions>(options =>
             {
                 options.MultipartBodyLengthLimit = GlobalTo.GetValue<int>("StaticResource:MaxSize") * 1024 * 1024;
@@ -127,7 +127,7 @@ namespace Blog.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMemoryCache memoryCache)
         {
-            //»º´æ
+            //ï¿½ï¿½ï¿½ï¿½
             CacheTo.memoryCache = memoryCache;
 
             if (env.IsDevelopment())
@@ -140,19 +140,19 @@ namespace Blog.Web
                 app.UseHsts();
             }
 
-            //ÅäÖÃswagger
+            //ï¿½ï¿½ï¿½ï¿½swagger
             app.UseSwagger().UseSwaggerUI(c =>
             {
-                c.DocumentTitle = "Netnr API";
+                c.DocumentTitle = "API";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", c.DocumentTitle);
             });
 
-            //Ä¬ÈÏÆðÊ¼Ò³index.html
+            //Ä¬ï¿½ï¿½ï¿½ï¿½Ê¼Ò³index.html
             DefaultFilesOptions options = new DefaultFilesOptions();
             options.DefaultFileNames.Add("index.html");
             app.UseDefaultFiles(options);
 
-            //¾²Ì¬×ÊÔ´ÔÊÐí¿çÓò
+            //ï¿½ï¿½Ì¬ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             app.UseStaticFiles(new StaticFileOptions()
             {
                 OnPrepareResponse = (x) =>
@@ -163,7 +163,7 @@ namespace Blog.Web
 
             app.UseRouting();
 
-            //ÊÚÈ¨·ÃÎÊ
+            //ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½
             app.UseAuthentication();
             app.UseAuthorization();
 

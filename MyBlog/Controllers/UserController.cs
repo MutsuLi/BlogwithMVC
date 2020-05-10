@@ -708,7 +708,7 @@ namespace Blog.Web.Controllers
                                             var txt = FileTo.ReadText(GlobalTo.WebRootPath + "/template/", "sendmailverify.html");
                                             txt = txt.Replace("@ToMail@", ToMail).Replace("@VerifyLink@", VerifyLink);
 
-                                            vm = MailAid.Send(ToMail, "[Netnr] 验证你的邮箱", txt);
+                                            vm = MailAid.Send(ToMail, "验证你的邮箱", txt);
 
                                             if (vm.code == 200)
                                             {

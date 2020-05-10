@@ -258,36 +258,36 @@
             备注
             </summary>
         </member>
-        <member name="T:Netnr.FileServer.Program">
+        <member name="T:Blog.FileServer.Program">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Netnr.FileServer.Program.Main(System.String[])">
+        <member name="M:Blog.FileServer.Program.Main(System.String[])">
             <summary>
             
             </summary>
             <param name="args"></param>
         </member>
-        <member name="M:Netnr.FileServer.Program.CreateHostBuilder(System.String[])">
+        <member name="M:Blog.FileServer.Program.CreateHostBuilder(System.String[])">
             dotnet Netnr.FileServer.dll "http://*:42"
         </member>
-        <member name="T:Netnr.FileServer.Startup">
+        <member name="T:Blog.FileServer.Startup">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Netnr.FileServer.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Hosting.IHostEnvironment)">
+        <member name="M:Blog.FileServer.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Hosting.IHostEnvironment)">
             <summary>
-            构造
+            ����
             </summary>
-            <param name="configuration">配置信息</param>
-            <param name="env">环境信息</param>
+            <param name="configuration">������Ϣ</param>
+            <param name="env">������Ϣ</param>
         </member>
-        <member name="M:Netnr.FileServer.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Blog.FileServer.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             This method gets called by the runtime. Use this method to add services to the container.
         </member>
-        <member name="M:Netnr.FileServer.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+        <member name="M:Blog.FileServer.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Caching.Memory.IMemoryCache)">
             This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         </member>
     </members>

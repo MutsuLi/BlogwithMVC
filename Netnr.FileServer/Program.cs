@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Netnr.FileServer
+namespace Blog.FileServer
 {
     /// <summary>
     /// 
@@ -23,7 +23,7 @@ namespace Netnr.FileServer
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    //ÅäÖÃKestrel½ÓÊÕÎÄ¼þ
+                    //ï¿½ï¿½ï¿½ï¿½Kestrelï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
                     webBuilder.ConfigureKestrel((context, options) =>
                     {
                         options.Limits.MaxRequestBodySize = GlobalTo.GetValue<int>("StaticResource:MaxSize") * 1024 * 1024;

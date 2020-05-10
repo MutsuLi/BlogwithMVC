@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 
-namespace Netnr.Web.Areas.Run.Controllers
+namespace Blog.Web.Areas.Run.Controllers
 {
     [Area("Run")]
     public class DiscoverController : Controller
@@ -17,7 +17,7 @@ namespace Netnr.Web.Areas.Run.Controllers
         {
             var uinfo = new UserAuthAid(HttpContext).Get();
 
-            var ps = Common.RunQuery(q, 0, uinfo.UserId, page);
+            var ps = Func.Common.RunQuery(q, 0, uinfo.UserId, page);
             ps.Route = Request.Path;
             ViewData["q"] = q;
             return View("_PartialRunList", ps);
