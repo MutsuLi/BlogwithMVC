@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Blog.Web.Filters;
 using Newtonsoft.Json.Linq;
 
-namespace Netnr.Web.Controllers
+namespace Blog.Web.Controllers
 {
     /// <summary>
     /// 尬服 guff.ltd 提供所有接口支持
@@ -64,7 +64,7 @@ namespace Netnr.Web.Controllers
                             OwnerId = uinfo.UserId;
                         }
 
-                        var pvm = Common.GuffQuery(category, q, nv, tag, obj, OwnerId, uinfo.UserId, page);
+                        var pvm = Func.Common.GuffQuery(category, q, nv, tag, obj, OwnerId, uinfo.UserId, page);
                         vm.data = pvm;
 
                         vm.Set(ARTag.success);
@@ -72,7 +72,7 @@ namespace Netnr.Web.Controllers
                 }
                 else
                 {
-                    var pvm = Common.GuffQuery(category, q, nv, tag, obj, OwnerId, uinfo.UserId, page);
+                    var pvm = Func.Common.GuffQuery(category, q, nv, tag, obj, OwnerId, uinfo.UserId, page);
                     vm.data = pvm;
 
                     vm.Set(ARTag.success);
@@ -538,7 +538,7 @@ namespace Netnr.Web.Controllers
                     PageSize = 10
                 };
 
-                var list = Common.ReplyOneQuery(EnumAid.ReplyType.GuffRecord, id, pag);
+                var list = Func.Common.ReplyOneQuery(EnumAid.ReplyType.GuffRecord, id, pag);
                 //匿名用户，生成邮箱MD5加密用于请求头像
                 foreach (var item in list)
                 {

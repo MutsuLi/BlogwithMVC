@@ -1,6 +1,5 @@
 /*
  * mxg 为 mxgraph 调用封装
- * by netnr
  * 
  */
 

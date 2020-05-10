@@ -1,7 +1,7 @@
 ﻿SELECT '{' + '"UserInfo":' +
        (
            SELECT UserId = 0,
-                  UserName = 'netnr',
+                  UserName = 'mutsuli',
                   UserPwd = SUBSTRING(sys.fn_sqlvarbasetostr(HASHBYTES('MD5', '123456')), 3, 32),
                   UserCreateTime,
                   UserLoginTime,

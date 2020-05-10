@@ -14,7 +14,7 @@ using Blog.Func;
 using Blog.Utils;
 using Blog.Common;
 
-namespace Netnr.Web.Controllers
+namespace Blog.Web.Controllers
 {
     /// <summary>
     /// 主体
@@ -30,7 +30,7 @@ namespace Netnr.Web.Controllers
         [ResponseCache(Duration = 5)]
         public IActionResult Index(string k, int page = 1)
         {
-            var vm = Common.UserWritingQuery(k, page);
+            var vm = Func.Common.UserWritingQuery(k, page);
             vm.Route = Request.Path;
 
             return View("_PartialViewWriting", vm);
@@ -52,7 +52,7 @@ namespace Netnr.Web.Controllers
             }
             else
             {
-                var vm = Common.UserWritingQuery(k, page, tag);
+                var vm = Func.Common.UserWritingQuery(k, page, tag);
                 vm.Route = Request.Path;
 
                 return View("_PartialViewWriting", vm);
@@ -65,7 +65,7 @@ namespace Netnr.Web.Controllers
         /// <returns></returns>
         public IActionResult Tags()
         {
-            var tags = Common.TagsQuery().Select(x => new
+            var tags = Func.Common.TagsQuery().Select(x => new
             {
                 x.TagName,
                 x.TagIcon
@@ -98,7 +98,7 @@ namespace Netnr.Web.Controllers
             if (!string.IsNullOrWhiteSpace(keys))
             {
                 keys = keys.ToLower();
-                list = Common.TagsQuery().Where(x => x.TagName.Contains(keys)).Take(7).ToList();
+                list = Func.Common.TagsQuery().Where(x => x.TagName.Contains(keys)).Take(7).ToList();
             }
             return list.ToJson();
         }
@@ -140,7 +140,7 @@ namespace Netnr.Web.Controllers
                 var lisTagId = new List<int>();
                 TagIds.Split(',').ToList().ForEach(x => lisTagId.Add(Convert.ToInt32(x)));
 
-                var lisTagName = Common.TagsQuery().Where(x => lisTagId.Contains(x.TagId)).ToList();
+                var lisTagName = Func.Common.TagsQuery().Where(x => lisTagId.Contains(x.TagId)).ToList();
 
                 mo.Uid = uinfo.UserId;
                 mo.UwCreateTime = DateTime.Now;
@@ -196,7 +196,7 @@ namespace Netnr.Web.Controllers
         {
             if (int.TryParse(RouteData.Values["Id"]?.ToString(), out int wid))
             {
-                var uwo = Common.UserWritingOneQuery(wid);
+                var uwo = Func.Common.UserWritingOneQuery(wid);
                 if (uwo == null)
                 {
                     return Redirect("/");
@@ -210,7 +210,7 @@ namespace Netnr.Web.Controllers
 
                 var vm = new PageVM()
                 {
-                    Rows = Common.ReplyOneQuery(EnumAid.ReplyType.UserWriting, wid.ToString(), pag),
+                    Rows = Func.Common.ReplyOneQuery(EnumAid.ReplyType.UserWriting, wid.ToString(), pag),
                     Pag = pag,
                     Temp = uwo,
                     Route = "/home/list/" + wid.ToString()

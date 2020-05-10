@@ -10,7 +10,7 @@ using Blog.Func;
 using Blog.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Netnr.Web.Controllers;
+using Blog.Web.Controllers;
 
 namespace Blog.Web.Controllers
 {

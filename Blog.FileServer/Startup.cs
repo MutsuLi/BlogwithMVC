@@ -50,7 +50,7 @@ namespace Blog.FileServer
 
                 "FileServer,Fast".Split(',').ToList().ForEach(x =>
                 {
-                    c.IncludeXmlComments(System.AppContext.BaseDirectory + "Netnr." + x + ".xml", true);
+                    c.IncludeXmlComments(System.AppContext.BaseDirectory + "Blog." + x + ".xml", true);
                 });
             });
 
