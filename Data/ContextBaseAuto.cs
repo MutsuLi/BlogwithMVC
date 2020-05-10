@@ -281,7 +281,7 @@ namespace Blog.Data
 
                 entity.Property(e => e.GrdCash)
                     .HasColumnType("money")
-                    .HasComment("礼金");
+                    .HasComment("礼金").HasColumnType("decimal(18,3)");
 
                 entity.Property(e => e.GrdCreateTime)
                     .HasColumnType("datetime")
