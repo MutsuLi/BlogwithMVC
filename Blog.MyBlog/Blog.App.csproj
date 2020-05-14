@@ -19,16 +19,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\DataModels\Models.csproj" />
-    <ProjectReference Include="..\Data\Context.csproj" />
-    <ProjectReference Include="..\Func\Func.csproj" />
-    <ProjectReference Include="..\Login\Login.csproj" />
-    <ProjectReference Include="..\Utils\Utils.csproj" />
+    <ProjectReference Include="..\Blog.Common\Common.csproj" />
+    <ProjectReference Include="..\Blog.DataModels\Models.csproj" />
+    <ProjectReference Include="..\Blog.Data\Context.csproj" />
+    <ProjectReference Include="..\Blog.Func\Func.csproj" />
+    <ProjectReference Include="..\Blog.Login\Login.csproj" />
+    <ProjectReference Include="..\Blog.Utils\Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Blog.Web.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Dockerfile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

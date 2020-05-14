@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataModels\Models.csproj" />
-    <ProjectReference Include="..\Utils\Utils.csproj" />
+    <ProjectReference Include="..\Blog.DataModels\Models.csproj" />
+    <ProjectReference Include="..\Blog.Utils\Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,10 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\Data\Context.csproj" />
-    <ProjectReference Include="..\Login\Login.csproj" />
-    <ProjectReference Include="..\Utils\Utils.csproj" />
+    <ProjectReference Include="..\Blog.Common\Common.csproj" />
+    <ProjectReference Include="..\Blog.Data\Context.csproj" />
+    <ProjectReference Include="..\Blog.Utils\Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>

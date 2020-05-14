@@ -16,8 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\DataModels\Models.csproj" />
+    <ProjectReference Include="..\Blog.Common\Common.csproj" />
+    <ProjectReference Include="..\Blog.DataModels\Models.csproj" />
+    <ProjectReference Include="..\Blog.Login\Login.csproj" />
   </ItemGroup>
 
 </Project>
