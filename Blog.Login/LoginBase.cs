@@ -1,166 +1,149 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
-using System.Text;
-using Blog.Utils;
+﻿using Blog.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using System;
+using System.Collections.Generic;
 
 namespace Blog.Login
 {
-    //
-    // 摘要:
-    //     基础支持
+    /// <summary>
+    /// 基础支持
+    /// </summary>
     public class LoginBase
     {
-        //
-        // 摘要:
-        //     登录类型枚举
+        /// <summary>
+        /// 登录类型枚举
+        /// </summary>
         public enum LoginType
         {
-            //
-            // 摘要:
-            //     腾讯QQ
+            /// <summary>
+            /// 腾讯QQ
+            /// </summary>
             QQ,
-            //
-            // 摘要:
-            //     新浪微博
+            /// <summary>
+            /// 新浪微博
+            /// </summary>
             WeiBo,
-            //
-            // 摘要:
-            //     腾讯微信
+            /// <summary>
+            /// 腾讯微信
+            /// </summary>
             WeChat,
-            //
-            // 摘要:
-            //     GitHub
+            /// <summary>
+            /// GitHub
+            /// </summary>
             GitHub,
-            //
-            // 摘要:
-            //     Gitee
+            /// <summary>
+            /// Gitee
+            /// </summary>
             Gitee,
-            //
-            // 摘要:
-            //     淘宝（天猫）
+            /// <summary>
+            /// 淘宝（天猫）
+            /// </summary>
             TaoBao,
-            //
-            // 摘要:
-            //     微软
+            /// <summary>
+            /// 微软
+            /// </summary>
             MicroSoft,
-            //
-            // 摘要:
-            //     钉钉
+            /// <summary>
+            /// 钉钉
+            /// </summary>
             DingTalk,
-            //
-            // 摘要:
-            //     谷歌
+            /// <summary>
+            /// 谷歌
+            /// </summary>
             Google,
-            //
-            // 摘要:
-            //     支付宝
+            /// <summary>
+            /// 支付宝
+            /// </summary>
             AliPay,
-            //
-            // 摘要:
-            //     Stack Overflow
+            /// <summary>
+            /// Stack Overflow
+            /// </summary>
             StackOverflow
         }
 
-        //
-        // 摘要:
-        //     接收授权码、防伪标识
+        /// <summary>
+        /// 接收授权码、防伪标识
+        /// </summary>
         public class AuthorizeResult
         {
-            //
-            // 摘要:
-            //     授权码
-            public string code
-            {
-                get;
-                set;
-            }
+            /// <summary>
+            /// 授权码
+            /// </summary>
+            public string code { get; set; }
 
-            //
-            // 摘要:
-            //     授权码，AliPay支付宝
-            public string auth_code
-            {
-                get;
-                set;
-            }
+            /// <summary>
+            /// 授权码，AliPay支付宝
+            /// </summary>
+            public string auth_code { get; set; }
 
-            //
-            // 摘要:
-            //     防伪参数，如果传递参数，会回传该参数。
-            public string state
-            {
-                get;
-                set;
-            }
+            /// <summary>
+            /// 防伪参数，如果传递参数，会回传该参数。
+            /// </summary>
+            public string state { get; set; }
         }
 
-        //
-        // 摘要:
-        //     实体 转 Pars
-        //
-        // 参数:
-        //   entity:
-        //
-        // 类型参数:
-        //   T:
+        /// <summary>
+        /// 实体 转 Pars
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public static string EntityToPars<T>(T entity)
         {
-            string text = string.Empty;
-            PropertyInfo[] properties = entity.GetType().GetProperties();
-            PropertyInfo[] array = properties;
-            foreach (PropertyInfo propertyInfo in array)
+            string result = string.Empty;
+            var pis = entity.GetType().GetProperties();
+            foreach (var pi in pis)
             {
-                string text2 = propertyInfo.GetValue(entity, null)?.ToString();
-                if (text2 != null)
+                string value = pi.GetValue(entity, null)?.ToString();
+                if (value != null)
                 {
-                    text = text + "&" + propertyInfo.Name + "=" + text2.ToEncode();
+                    result += "&" + pi.Name + "=" + value.ToEncode();
                 }
             }
-            return text.TrimStart('&');
+            return result.TrimStart('&');
         }
 
-        //
-        // 摘要:
-        //     处理结果
-        //
-        // 参数:
-        //   result:
-        //     请求的结果
-        //
-        //   resultNeedJObject:
-        //     处理的类型，默认JObject
-        //
-        // 类型参数:
-        //   T:
+        /// <summary>
+        /// 处理结果
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="result">请求的结果</param>
+        /// <param name="resultNeedJObject">处理的类型，默认JObject</param>
+        /// <returns></returns>
         public static T ResultOutput<T>(string result, List<string> resultNeedJObject = null) where T : class, new()
         {
-            T val = new T();
-            PropertyInfo[] properties = val.GetType().GetProperties();
-            JObject jObject = JObject.Parse(result);
-            PropertyInfo[] array = properties;
-            foreach (PropertyInfo propertyInfo in array)
+            var mo = new T();
+            var pis = mo.GetType().GetProperties();
+            var jo = JObject.Parse(result);
+            foreach (var pi in pis)
             {
                 object value;
                 try
                 {
-                    value = Convert.ChangeType(conversionType: (!propertyInfo.PropertyType.FullName!.Contains("System.Nullable")) ? propertyInfo.PropertyType : Type.GetType("System." + propertyInfo.PropertyType.FullName!.Split(',')[0].Split('.')[2]), value: jObject[propertyInfo.Name]!.ToString());
+                    Type type;
+                    if (pi.PropertyType.FullName.Contains("System.Nullable"))
+                    {
+                        type = Type.GetType("System." + pi.PropertyType.FullName.Split(',')[0].Split('.')[2]);
+                    }
+                    else
+                    {
+                        type = pi.PropertyType;
+                    }
+                    value = Convert.ChangeType(jo[pi.Name].ToString(), type);
                 }
                 catch (Exception)
                 {
                     value = null;
                 }
-                if (resultNeedJObject != null && resultNeedJObject.Count > 0)
+
+                if (resultNeedJObject?.Count > 0)
                 {
                     try
                     {
-                        if (resultNeedJObject.Contains(propertyInfo.Name))
+                        if (resultNeedJObject.Contains(pi.Name))
                         {
-                            value = JObject.Parse(jObject[propertyInfo.Name]!.ToString());
+                            value = JObject.Parse(jo[pi.Name].ToString());
                         }
                     }
                     catch (Exception)
@@ -168,51 +151,47 @@ namespace Blog.Login
                         value = null;
                     }
                 }
-                propertyInfo.SetValue(val, value, null);
+                pi.SetValue(mo, value, null);
             }
-            return val;
+
+            return mo;
         }
 
-        //
-        // 摘要:
-        //     验证对象是否有效
-        //
-        // 参数:
-        //   entity:
-        //
-        // 类型参数:
-        //   T:
+        /// <summary>
+        /// 验证对象是否有效
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public static bool IsValid<T>(T entity) where T : new()
         {
-            bool result = true;
-            string name = typeof(Required).Name;
-            PropertyInfo[] properties = entity.GetType().GetProperties();
-            PropertyInfo[] array = properties;
-            foreach (PropertyInfo propertyInfo in array)
+            bool b = true;
+            var reqName = typeof(Required).Name;
+            var pis = entity.GetType().GetProperties();
+            foreach (var pi in pis)
             {
-                bool flag = false;
-                object[] customAttributes = propertyInfo.GetCustomAttributes(inherit: true);
-                object[] array2 = customAttributes;
-                foreach (object obj in array2)
+                var isReq = false;
+                object[] attrs = pi.GetCustomAttributes(true);
+                foreach (var attr in attrs)
                 {
-                    Type type = obj.GetType();
-                    if (type.Name == name)
+                    var agt = attr.GetType();
+                    if (agt.Name == reqName)
                     {
-                        flag = true;
+                        isReq = true;
                         break;
                     }
                 }
-                if (flag)
+                if (isReq)
                 {
-                    object value = propertyInfo.GetValue(entity, null);
+                    var value = pi.GetValue(entity, null);
                     if (value == null || value.ToString() == "")
                     {
-                        result = false;
+                        b = false;
                         break;
                     }
                 }
             }
-            return result;
+            return b;
         }
     }
 }

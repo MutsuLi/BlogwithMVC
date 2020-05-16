@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Linq;
+using Blog.Login;
 
 namespace Blog.Web
 {
@@ -22,6 +23,14 @@ namespace Blog.Web
         {
             GlobalTo.Configuration = configuration;
             GlobalTo.HostEnvironment = env;
+
+
+            #region 第三方登录
+            GitHubConfig.ClientID = GlobalTo.GetValue("OAuthLogin:GitHub:ClientID");
+            GitHubConfig.ClientSecret = GlobalTo.GetValue("OAuthLogin:GitHub:ClientSecret");
+            GitHubConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:GitHub:Redirect_Uri");
+            GitHubConfig.ApplicationName = GlobalTo.GetValue("OAuthLogin:GitHub:ApplicationName");
+            #endregion
 
             using var db = new Data.ContextBase();
             if (db.Database.EnsureCreated())
