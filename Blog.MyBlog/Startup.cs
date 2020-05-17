@@ -68,32 +68,29 @@ namespace Blog.Web
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                //cookie�洢���û�ͬ�⣬ŷ���±�׼�����ҹرգ������û�ûͬ���޷�д��
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddControllersWithViews(options =>
             {
-                //ע��ȫ�ִ��������
                 options.Filters.Add(new Filters.FilterConfigs.ErrorActionFilter());
 
-                //ע��ȫ�ֹ�����
                 options.Filters.Add(new Filters.FilterConfigs.GlobalFilter());
 
-                //ע��ȫ����Ȩ����ʱ��¼����Ƿ���Ч
                 options.Filters.Add(new Filters.FilterConfigs.LoginSignValid());
             });
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {
-                //Actionԭ�����JSON
                 options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-                //���ڸ�ʽ��
+                
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
 
-            //����swagger
+            services.AddDbContext<Data.ContextBase>();
+
+            //swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo

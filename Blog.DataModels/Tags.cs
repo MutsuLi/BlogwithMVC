@@ -1,4 +1,6 @@
-﻿namespace Blog.Data.Models 
+﻿using System;
+
+namespace Blog.Data.Models 
 { 
     public partial class Tags
     {
@@ -14,5 +16,7 @@
         public string Spare1 { get; set; }
         public string Spare2 { get; set; }
         public string Spare3 { get; set; }
+        public DateTime updateTime { get; set; }
+        public DateTime createTime { get; set; }
     }
 }

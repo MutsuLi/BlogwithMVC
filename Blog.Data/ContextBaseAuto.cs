@@ -817,6 +817,10 @@ namespace Blog.Data
                 entity.Property(e => e.TagPid).HasComment("Pid");
 
                 entity.Property(e => e.TagStatus).HasComment("状态 1启用");
+
+                entity.Property(e => e.createTime).HasComment("创建时间");
+
+                entity.Property(e => e.updateTime).HasComment("修改时间");
             });
 
             modelBuilder.Entity<UserConnection>(entity =>
